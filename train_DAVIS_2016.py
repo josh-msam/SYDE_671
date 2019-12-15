@@ -26,7 +26,7 @@ if __name__ == "__main__":
     s = 1                  # image scaling factor (1 is regular size)
     batch_size = 2         # number of images in the sequence for backprop
     mode = 0               # mode --> see train_model
-    num_epochs = 1         # number of epochs for training
+    num_epochs = 10         # number of epochs for training
     learning_rate = 1e-5   # The learning rate
     new_arch = False       # Use adapted / changed Decoder architecture
     

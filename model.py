@@ -6,7 +6,7 @@ from torchvision import models
 
 import math
 
-from helpers_2 import pad_divide_by, ToCuda
+from helpers import pad_divide_by, ToCuda
 
 """THE NEW DECODER"""
 
@@ -14,7 +14,8 @@ class Decoder_NEW(nn.Module):
     """
     THIS DECODER IS A CHANGE MADE TO THE NETWORK TO TEST
     THE INFLUENCE OF NOT USING INTERPOLATION BUT 
-    TRANSPOSE CONVOLUTIONS INSTEAD  
+    TRANSPOSE CONVOLUTIONS INSTEAD FOR THE LAST 
+    LAYER.
     """
     def __init__(self, mdim):
         super(Decoder_NEW, self).__init__()
@@ -22,16 +23,17 @@ class Decoder_NEW(nn.Module):
         self.ResMM = ResBlock(mdim, mdim)
         self.RF3 = Refine(512, mdim) # 1/8 -> 1/4
         self.RF2 = Refine(256, mdim) # 1/4 -> 1
-        self.pred2 = nn.Conv2d(mdim, 2, kernel_size=(3,3), padding=(1,1), stride=1)
+        #self.pred2 = nn.Conv2d(mdim, 2, kernel_size=(3,3), padding=(1,1), stride=1)
+        self.CT1 = nn.ConvTranspose2d(mdim,int(mdim/2),4,stride=2,padding=1)
+        self.CT2 = nn.ConvTranspose2d(int(mdim/2),2,4,stride=2,padding=1)
         
-
     def forward(self, r4, r3, r2):
         m4 = self.ResMM(self.convFM(r4))
         m3 = self.RF3(r3, m4) # out: 1/8, 256
         m2 = self.RF2(r2, m3) # out: 1/4, 256
-        p2 = self.pred2(F.relu(m2))  
-
-        p = F.interpolate(p2, scale_factor=4, mode='bilinear', align_corners=False)
+#        p2 = self.pred2(F.relu(m2))  
+        p = self.CT2( self.CT1( F.relu(m2)))
+#        p = F.interpolate(p2, scale_factor=4, mode='bilinear', align_corners=False)
         return p #, p2, p3, p4
     
 """
