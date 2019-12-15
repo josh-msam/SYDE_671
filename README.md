@@ -25,7 +25,8 @@ Seoung Wug Oh, Joon-Young Lee, Ning Xu, Seon Joo Kim
 - scikit-image
 
 ### - How to Use
+- Download the DAVIS 2016 dataset from https://davischallenge.org/davis2016/code.html
 - look in train_DAVIS_2016.py for example.
-- Setup the right paths
+- Setup the right paths to the data.
 - Change settings as described. 
 - Run on single GPU. [tested on 1050 ti (4GB)]
