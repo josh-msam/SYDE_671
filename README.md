@@ -7,8 +7,12 @@ Seoung Wug Oh, Joon-Young Lee, Ning Xu, Seon Joo Kim
 
 [![Video Object Segmentation using Space-Time Memory Networks (ICCV 2019)](https://img.youtube.com/vi/vVZiBEDmgIU/0.jpg)](https://www.youtube.com/watch?v=vVZiBEDmgIU "Video Object Segmentation using Space-Time Memory Networks (ICCV 2019)")
 
-### - Code
-- model.py [contains the original STM model implementation + The NEW DECODER ARCHITECTURE]
+### - RE-USED Code
+- model.py [The STM model architecture]
+- video.py [Orginal forward pass function to memorize frames at an interval]
+
+### - NEW Code
+- model.py [The NEW DECODER ARCHITECTURE]
 - helpers.py [helper functions for loading model parameters and segmentation scoring]
 - video.py [functions to perform forward pass through video sequence]
 - dataset.py [classes to construct DAVIS 2016 dataloaders]
