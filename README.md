@@ -1,4 +1,4 @@
-# SYDE_671 Final project
+# SYDE_671 Group 9 Final project
 
 ## Our project is focused on the following ICCV 2019 paper:
 Video Object Segmentation using Space-Time Memory Networks
