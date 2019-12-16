@@ -172,7 +172,7 @@ def run_previ( model, Fs, Ms, name, nr=0, mem=None, show=False):
         mem['val'] = torch.cat([mem['val'], prev_value], dim=3)
         
         # REMOVE OLD MEMORY
-        if mem['key'].shape[3] > (nr+1):
+        if mem['key'].shape[3] > (abs(nr)+1):
             mem['key'] = mem['key'][:,:,:,args]
             mem['val'] = mem['val'][:,:,:,args]
 
