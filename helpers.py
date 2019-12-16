@@ -52,7 +52,7 @@ def load_model( model, weights_path ):
     else:
         raise("Cuda not available! ")
     
-def select_params( model, contains=""):
+def select_params( model, contains=[]):
     """
     Freezes all weights and un-freezes particalur layers 
     which have the "hint" in their variable names.
@@ -67,7 +67,7 @@ def select_params( model, contains=""):
     names = []
     for name, param in model.named_parameters():
         param.requires_grad = False
-        if name.find( contains ) != -1:
+        if any(name.find(c) != -1 for c in contains):
             param.requires_grad = True
             names.append([name,param.numel()])
 
